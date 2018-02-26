@@ -1,0 +1,17 @@
+{
+    "name": "bishan/bishan-plugin",
+    "description": "Testing plugin for wordpress",
+    "type": "project",
+    "license": "GPL",
+    "authors": [
+        {
+            "name": "Bishan",
+            "email": "toton333@yahoo.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "psr-4":{ "Inc\\": "./inc"}
+    }
+}
