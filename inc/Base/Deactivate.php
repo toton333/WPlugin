@@ -3,7 +3,7 @@
  * @package  BishanPlugin
  */
 
-namespace Inc;
+namespace Inc\Base;
 
 class Deactivate
 {
