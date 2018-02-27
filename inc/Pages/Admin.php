@@ -3,18 +3,35 @@
  * @package  BishanPlugin
  */
 namespace Inc\Pages;
-/**
-* 
-*/
+use \Inc\Api\SettingsApi;
+
 class Admin
 {
+
+	public $settings;
+	public $pages;
+
+    public function __construct(){
+
+      $this->settings = new SettingsApi();
+      $this->pages = array(
+      	array(
+
+      		'page_title' => 'Bishan Plugin', 
+			'menu_title' => 'Bishan', 
+			'capability' => 'manage_options', 
+			'menu_slug' => 'bishan_plugin', 
+			'callback' => function() { echo '<h1>Bishan Settings Page</h1>'; }, 
+			'icon_url' => 'dashicons-store', 
+			'position' => 110
+
+
+      ));
+
+    }
+
 	public function register() {
-		add_action( 'admin_menu', array( $this, 'add_admin_pages' ) );
+		$this->settings->addPages($this->pages)->register();
 	}
-	public function add_admin_pages() {
-		add_menu_page( 'Bishan Plugin', 'Bishan', 'manage_options', 'bishan_plugin', array( $this, 'admin_index' ), 'dashicons-store', 110 );
-	}
-	public function admin_index() {
-		require_once PLUGIN_PATH . 'templates/admin.php';
-	}
+	
 }
