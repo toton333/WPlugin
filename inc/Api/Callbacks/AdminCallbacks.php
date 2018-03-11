@@ -24,23 +24,5 @@ class AdminCallbacks
 	{
 		return require_once( PLUGIN_PATH."/templates/widget.php" );
 	}
-	public function bishanOptionsGroup($input)
-	{
-		return $input;
-	}
-	public function bishanAdminSection()
-	{
-		echo 'Check this beautiful section!';
-	}
-	public function bishanTextExample()
-	{
-		$value = esc_attr( get_option( 'text_example' ) );
-		echo '<input type="text" class="regular-text" name="text_example" value="' . $value . '" placeholder="Write Something Here!">';
-	}
-	public function bishanFirstName()
-	{
-		$value = esc_attr( get_option( 'first_name' ) );
-		echo '<input type="text" class="regular-text" name="first_name" value="' . $value . '" placeholder="Write your First Name">';
-	}
-
+	
 }

@@ -4,21 +4,26 @@
  */
 namespace Inc\Pages;
 use \Inc\Api\SettingsApi;
-use \Inc\Api\Callbacks\AdminCallbacks;
+use Inc\Base\BaseController;
+use Inc\Api\Callbacks\AdminCallbacks;
+use Inc\Api\Callbacks\ManagerCallbacks;
 
-class Admin
+
+class Admin extends BaseController
 {
 
 	public $settings;
 	public $callbacks;
+	public $callbacks_mngr;
 	public $pages = array();
 	public $subpages = array();
 
     public function __construct(){
-
-      $this->settings = new SettingsApi();
-      $this->callbacks = new AdminCallbacks();
-     
+      
+      parent::__construct();
+      $this->settings       = new SettingsApi();
+      $this->callbacks      = new AdminCallbacks();
+      $this->callbacks_mngr = new ManagerCallbacks();
 
     }
 
@@ -87,17 +92,29 @@ class Admin
 
 	public function setSettings()
 	{
+
+		/*//this for multiple options fields in database
+		$args = array();
+		foreach ( $this->managers as $key => $value ) {
+			$args[] = array(
+				'option_group' => 'bishan_plugin_settings',
+				'option_name' => $key,
+				'callback' => array( $this->callbacks_mngr, 'checkboxSanitize' )
+			);
+		}*/
+          
+
+        //this for single option field in database  
 		$args = array(
 			array(
-				'option_group' => 'bishan_options_group',
-				'option_name' => 'text_example',
-				'callback' => array( $this->callbacks, 'bishanOptionsGroup' )
-			),
-			array(
-				'option_group' => 'bishan_options_group',
-				'option_name' => 'first_name'
+				'option_group' => 'bishan_plugin_settings',
+				'option_name' => 'bishan_plugin',
+				'callback' => array( $this->callbacks_mngr, 'checkboxSanitize' )
 			)
 		);
+		
+
+
 		$this->settings->setSettings( $args );
 	}
 
@@ -106,8 +123,8 @@ class Admin
 		$args = array(
 			array(
 				'id' => 'bishan_admin_index',
-				'title' => 'Settings',
-				'callback' => array( $this->callbacks, 'bishanAdminSection' ),
+				'title' => 'Settings Manager',
+				'callback' => array( $this->callbacks_mngr, 'adminSectionManager' ),
 				'page' => 'bishan_plugin'
 			)
 		);
@@ -116,31 +133,41 @@ class Admin
 
 	public function setFields()
 	{
-		$args = array(
-			array(
-				'id' => 'text_example',
-				'title' => 'Text Example',
-				'callback' => array( $this->callbacks, 'bishanTextExample' ),
+		$args = array();
+
+		/*//this for multiple options fields in database
+		foreach ( $this->managers as $key => $value ) {
+			$args[] = array(
+				'id' => $key,
+				'title' => $value,
+				'callback' => array( $this->callbacks_mngr, 'checkboxField' ),
 				'page' => 'bishan_plugin',
 				'section' => 'bishan_admin_index',
 				'args' => array(
-					'label_for' => 'text_example',
-					'class' => 'example-class'
+					'label_for' => $key,
+					'class' => 'ui-toggle'
 				)
-			),
-			array(
-				'id' => 'first_name',
-				'title' => 'First Name',
-				'callback' => array( $this->callbacks, 'bishanFirstName' ),
+			);
+		}*/
+        
+
+        //this for single options field in database
+		foreach ( $this->managers as $key => $value ) {
+			$args[] = array(
+				'id' => $key,
+				'title' => $value,
+				'callback' => array( $this->callbacks_mngr, 'checkboxField' ),
 				'page' => 'bishan_plugin',
 				'section' => 'bishan_admin_index',
 				'args' => array(
-					'label_for' => 'first_name',
-					'class' => 'example-class'
+					'option_name' => 'bishan_plugin',
+					'label_for' => $key,
+					'class' => 'ui-toggle'
 				)
-			)
-		);
+			);
+		}
 		$this->settings->setFields( $args );
+	
 	}
 
 
