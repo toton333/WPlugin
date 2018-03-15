@@ -9,7 +9,7 @@ use Inc\Api\Callbacks\AdminCallbacks;
 use Inc\Api\Callbacks\ManagerCallbacks;
 
 
-class Admin extends BaseController
+class Dashboard extends BaseController
 {
 
 	public $settings;
@@ -30,13 +30,12 @@ class Admin extends BaseController
 	public function register() {
 
 		$this->setPages();
-		$this->setSubpages();
 
 		$this->setSettings();
 		$this->setSections();
 		$this->setFields();
 
-		$this->settings->addPages( $this->pages )->withSubPage( 'Dashboard' )->addSubPages( $this->subpages )->register();
+		$this->settings->addPages( $this->pages )->withSubPage( 'Dashboard' )->register();
 	}
 
 	public function setPages(){
@@ -57,35 +56,7 @@ class Admin extends BaseController
 
 	}
 
-	public function setSubpages(){
-
-     $this->subpages = array(
-			array(
-				'parent_slug' => 'bishan_plugin', 
-				'page_title' => 'Custom Post Types', 
-				'menu_title' => 'CPT', 
-				'capability' => 'manage_options', 
-				'menu_slug' => 'bishan_cpt', 
-				'callback' => array( $this->callbacks, 'adminCpt' )
-			),
-			array(
-				'parent_slug' => 'bishan_plugin', 
-				'page_title' => 'Custom Taxonomies', 
-				'menu_title' => 'Taxonomies', 
-				'capability' => 'manage_options', 
-				'menu_slug' => 'bishan_taxonomies', 
-				'callback' =>  array( $this->callbacks, 'adminTaxonomy' )
-			),
-			array(
-				'parent_slug' => 'bishan_plugin', 
-				'page_title' => 'Custom Widgets', 
-				'menu_title' => 'Widgets', 
-				'capability' => 'manage_options', 
-				'menu_slug' => 'bishan_widgets', 
-				'callback' => array( $this->callbacks, 'adminWidget' )
-			)
-		);
-	}
+	
 
 
 
