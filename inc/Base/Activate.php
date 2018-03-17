@@ -10,11 +10,12 @@ class Activate
 	public static function activate() {
 		flush_rewrite_rules();
 
-		if ( get_option( 'bishan_plugin' ) ) {
-			return;
-		}
-
 		$default = array();
-		update_option( 'bishan_plugin', $default );
+		if ( ! get_option( 'bishan_plugin' ) ) {
+			update_option( 'bishan_plugin', $default );
+		}
+		if ( ! get_option( 'bishan_plugin_cpt' ) ) {
+			update_option( 'bishan_plugin_cpt', $default );
+		}
 	}
 }

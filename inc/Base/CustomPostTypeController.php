@@ -155,8 +155,9 @@ class CustomPostTypeController extends BaseController
 
 	public function storeCustomPostTypes()
 	{
+		//checking incase bishan_plugin_cpt is empty, if empty then use an empty array
+		$options = get_option('bishan_plugin_cpt') ?: array();
 
-		$options = get_option('bishan_plugin_cpt');
 		foreach ($options as $option) {
 			$this->custom_post_types[] = array(
 				'post_type'             => $option['post_type'],

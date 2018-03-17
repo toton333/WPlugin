@@ -11,7 +11,18 @@ class CptCallbacks
 	}
 	public function cptSanitize( $input )
 	{
+
 		$output = get_option( 'bishan_plugin_cpt');
+		
+
+
+        //if bishan_plugin_cpt is empty then foreach loop won't work,
+		// so just need to put new custom post directly
+		if ( count($output) == 0  ) {
+			$output[$input['post_type']] = $input;
+			return $output;
+		}
+
         foreach ($output as $key => $value) {
         	if($input['post_type'] === $key){
 
