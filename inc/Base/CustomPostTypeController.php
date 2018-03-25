@@ -91,7 +91,6 @@ class CustomPostTypeController extends BaseController
 					'option_name' => 'bishan_plugin_cpt',
 					'label_for' => 'post_type',
 					'placeholder' => 'eg. product',
-					'array' => 'post_type'
 				)
 			),
 			array(
@@ -104,7 +103,6 @@ class CustomPostTypeController extends BaseController
 					'option_name' => 'bishan_plugin_cpt',
 					'label_for' => 'singular_name',
 					'placeholder' => 'eg. Product',
-					'array' => 'post_type'
 				)
 			),
 			array(
@@ -117,7 +115,6 @@ class CustomPostTypeController extends BaseController
 					'option_name' => 'bishan_plugin_cpt',
 					'label_for' => 'plural_name',
 					'placeholder' => 'eg. Products',
-					'array' => 'post_type'
 				)
 			),
 			array(
@@ -130,7 +127,6 @@ class CustomPostTypeController extends BaseController
 					'option_name' => 'bishan_plugin_cpt',
 					'label_for' => 'public',
 					'class' => 'ui-toggle',
-					'array' => 'post_type'
 				)
 			),
 			array(
@@ -143,7 +139,6 @@ class CustomPostTypeController extends BaseController
 					'option_name' => 'bishan_plugin_cpt',
 					'label_for' => 'has_archive',
 					'class' => 'ui-toggle',
-					'array' => 'post_type'
 				)
 			)
 		);
